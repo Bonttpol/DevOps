@@ -1,2 +1,2 @@
 # DevOps
-fro SF
+for SF
