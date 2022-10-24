@@ -1,0 +1,22 @@
+{
+  "name": "devops",
+  "version": "1.0.0",
+  "description": "My first project in DevOps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bonttpol/DevOps.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bonttpol/DevOps/issues"
+  },
+  "homepage": "https://github.com/Bonttpol/DevOps#readme",
+  "dependencies": {
+    "jquery": "^3.6.1"
+  }
+}
