@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-sf
+  labels:
+    app: ngsf
+spec:
+  selector:
+    matchLabels:
+      app: ngsf
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: ngsf
+    spec:
+      containers:
+      - name: ngsf-container
+        image: nginx:1.21.1-alpine
+        ports:
+          - containerPort: 80
+        volumeMounts:
+        - name: config-volume
+          mountPath:  /etc/nginx/
+          readOnly: true          
+        env:
+        - name: SECRET_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: auth-basic
+              key: user1
+        - name: SECRET_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: auth-basic
+              key: password1
+      volumes:
+        - name: config-volume
+          configMap:
+            name: ng-conf
+            items:
+            - key: nginx.conf
+              path: nginx.conf
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: sf-webserver
+spec:
+  selector:
+    app: ngsf
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
